@@ -1,13 +1,9 @@
 const shelljs = require('shelljs')
-const inflection = require('inflection');
+const baseLoader = require('./base.loader')
+
 
 module.exports = (h, name) => {
-    const path = name.split('/').reverse().slice(1).reverse().join('/')
-    const filePrefix = name.split('/').pop()
-    const baseDir = `${h.root}/${path}`;
-    h.storage.path = path
-    h.storage.filePrefix = filePrefix
-    h.storage.baseDir = baseDir
+    const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
 
     shelljs.mkdir('-p', baseDir)
     shelljs.mkdir('-p', `${baseDir}/enums`)
@@ -16,27 +12,23 @@ module.exports = (h, name) => {
     shelljs.touch(decoratorIndexFile)
     h.storage.decoratorIndexFile = decoratorIndexFile
 
-    const enumTypeFile = `${baseDir}/enums/${filePrefix}.enum.ts`
+    const enumTypeFile = `${baseDir}/enums/${spineCase}.enum.ts`
     h.storage.enumTypeFile = enumTypeFile
 
-    const enumTypeTestFile = `${baseDir}/enums/${filePrefix}.enum.spec.ts`
+    const enumTypeTestFile = `${baseDir}/enums/${spineCase}.enum.spec.ts`
     h.storage.enumTypeTestFile = enumTypeTestFile
 
     const constantFile = `${baseDir}/constants.ts`
     shelljs.touch(constantFile)
     h.storage.constantFile = constantFile
 
-
-    const normalized = filePrefix.replace(/-/g, '_')
-    h.storage.normalized = normalized
-
-    const enumTypeName = `${inflection.camelize(normalized)}Enum`
+    const enumTypeName = `${camelCase}Enum`
     h.storage.enumTypeName = enumTypeName
 
-    const constantName = `GQL_ENUM_TYPE_${normalized.toUpperCase()}`
+    const constantName = `GQL_ENUM_TYPE_${upperCase}`
     h.storage.constantName = constantName
 
-    const enumName = `${h.inflection.camelize(normalized)}Enum`
+    const enumName = `${camelCase}Enum`
     h.storage.enumName = enumName
 }
 
