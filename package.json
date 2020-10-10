@@ -1,0 +1,11 @@
+{
+  "name": "nest-gql-code-generator",
+  "version": "1.0.0",
+  "scripts": {
+    "generate": "hygen g"
+  },
+  "dependencies": {
+    "hygen": "^6.0.4",
+    "shelljs": "^0.8.4"
+  }
+}
