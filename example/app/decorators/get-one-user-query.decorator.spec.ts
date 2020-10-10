@@ -1,12 +1,12 @@
-import { GetOne-userQuery } from './get-one-user-query.decorator';
+import { GetOneUserQuery } from './get-one-user-query.decorator';
 
-describe('GetOne-userQuery', () => {
+describe('GetOneUserQuery', () => {
 	it('should defined', () => {
-		expect(GetOne-userQuery).toBeDefined();
+		expect(GetOneUserQuery).toBeDefined();
 	});
 
 	it('should return Query decorator', () => {
-		const decorator = GetOne-userQuery();
+		const decorator = GetOneUserQuery();
 
 		expect(decorator).toBeInstanceOf(Function);
 	});
@@ -14,7 +14,7 @@ describe('GetOne-userQuery', () => {
 	it('should take arg options', function() {
 		const options = {};
 
-		const decorator = GetOne-userQuery(options);
+		const decorator = GetOneUserQuery(options);
 
 		expect(decorator).toBeInstanceOf(Function);
 	});

@@ -1,8 +1,8 @@
 import { Args, ArgsOptions } from '@nestjs/graphql';
-import { CreateOne-userInputType } from '../input-types/create-one-user.input-type';
+import { CreateOneUserInputType } from '../input-types/create-one-user.input-type';
 
-export function CreateOne-userInputTypeArgs(options?: ArgsOptions): ParameterDecorator {
+export function CreateOneUserInputTypeArgs(options?: ArgsOptions): ParameterDecorator {
 	return Args('input', {
-		type: () => CreateOne-userInputType, ...options
+		type: () => CreateOneUserInputType, ...options
 	});
 }

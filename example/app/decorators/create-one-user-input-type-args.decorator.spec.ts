@@ -1,12 +1,12 @@
-import { CreateOne-userInputTypeArgs } from './create-one-user-input-type-args.decorator';
+import { CreateOneUserInputTypeArgs } from './create-one-user-input-type-args.decorator';
 
-describe('CreateOne-userInputTypeArgs', () => {
+describe('CreateOneUserInputTypeArgs', () => {
 	it('should defined', () => {
-		expect(CreateOne-userInputTypeArgs).toBeDefined();
+		expect(CreateOneUserInputTypeArgs).toBeDefined();
 	});
 
 	it('should return Mutation decorator', () => {
-		const decorator = CreateOne-userInputTypeArgs();
+		const decorator = CreateOneUserInputTypeArgs();
 
 		expect(decorator).toBeInstanceOf(Function);
 	});
@@ -14,7 +14,7 @@ describe('CreateOne-userInputTypeArgs', () => {
 	it('should take arg options', function() {
 		const options = {};
 
-		const decorator = CreateOne-userInputTypeArgs(options);
+		const decorator = CreateOneUserInputTypeArgs(options);
 
 		expect(decorator).toBeInstanceOf(Function);
 	});

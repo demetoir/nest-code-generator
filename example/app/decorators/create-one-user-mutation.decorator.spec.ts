@@ -1,12 +1,12 @@
-import { CreateOne-userMutation } from './create-one-user-mutation.decorator';
+import { CreateOneUserMutation } from './create-one-user-mutation.decorator';
 
-describe('CreateOne-userMutation', () => {
+describe('CreateOneUserMutation', () => {
 	it('should defined', () => {
-		expect(CreateOne-userMutation).toBeDefined();
+		expect(CreateOneUserMutation).toBeDefined();
 	});
 
 	it('should return Mutation decorator', () => {
-		const decorator = CreateOne-userMutation();
+		const decorator = CreateOneUserMutation();
 
 		expect(decorator).toBeInstanceOf(Function);
 	});
@@ -14,7 +14,7 @@ describe('CreateOne-userMutation', () => {
 	it('should take arg options', function() {
 		const options = {};
 
-		const decorator = CreateOne-userMutation(options);
+		const decorator = CreateOneUserMutation(options);
 
 		expect(decorator).toBeInstanceOf(Function);
 	});
