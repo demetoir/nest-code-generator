@@ -29,7 +29,7 @@ const constantFile = baseDir + "/constants.ts"
 h.shelljs.touch(constantFile)
 h.storage.constantFile = constantFile
 
-const normalized = filePrefix.replace('-', '_')
+const normalized = filePrefix.replace(/-/g, '_')
 h.storage.normalized = normalized
 
 const objectTypeName = h.inflection.camelize(normalized)

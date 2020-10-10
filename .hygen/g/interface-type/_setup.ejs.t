@@ -27,7 +27,7 @@ h.storage.constantFile = constantFile
 const decoratorImportFile = "./" + h.storage.filePrefix + "-interface-type-args.decorator"
 h.storage.decoratorImportFile = decoratorImportFile
 
-const normalized = filePrefix.replace('-', '_')
+const normalized = filePrefix.replace(/-/g, '_')
 h.storage.normalized = normalized
 
 const decoratorName = h.inflection.camelize(normalized) + 'InputTypeArgs'
