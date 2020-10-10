@@ -5,6 +5,6 @@ module.exports = {
     helpers: {
         shelljs: shelljs,
         storage: {},
-        root: "/src"
+        root: "src"
     }
 }
