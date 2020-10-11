@@ -1,9 +1,9 @@
-const inputTypeLoader = require('./input-type.loader')
-const enumTypeLoader = require('./enum-type.loader')
-const interfaceTypeLoader = require('./interface-type.loader')
-const mutationDecoratorLoader = require('./mutation-decorator.loader')
-const objectTypeLoader = require('./object-type.loader')
-const queryDecoratorLoader = require('./query-decorator.loader')
+const inputTypeLoader = require('./loaders/input-type.loader')
+const enumTypeLoader = require('./loaders/enum-type.loader')
+const interfaceTypeLoader = require('./loaders/interface-type.loader')
+const mutationDecoratorLoader = require('./loaders/mutation-decorator.loader')
+const objectTypeLoader = require('./loaders/object-type.loader')
+const queryDecoratorLoader = require('./loaders/query-decorator.loader')
 
 module.exports = {
     inputTypeLoader: inputTypeLoader,
