@@ -1,6 +1,5 @@
 const inflection = require('inflection');
 
-
 module.exports = class NameGenerator {
     constructor({baseDir, spineCase, snakeCase, upperCase, camelCase}) {
         this.spineCase = spineCase
@@ -50,6 +49,10 @@ module.exports = class NameGenerator {
         return `${this.baseDir}/input-types`
     }
 
+    get inputTypeIndexFile(){
+        return `${this.baseDir}/input-types/index.ts`
+    }
+
     get decoratorIndexFile() {
         return `${this.baseDir}/decorators/index.ts`
     }
@@ -90,6 +93,10 @@ module.exports = class NameGenerator {
         return `${this.camelCase}InputType`
     }
 
+    get interfaceTypeIndexFile(){
+        return `${this.baseDir}/interface-types/index.ts`
+    }
+
     get interfaceTypesDir() {
         return `${this.baseDir}/interface-types`
     }
@@ -114,7 +121,6 @@ module.exports = class NameGenerator {
         return `${this.camelCase}InterfaceType`
     }
 
-
     get mutationDecoratorFile() {
         return `${this.baseDir}/decorators/${this.spineCase}-mutation.decorator.ts`
     }
@@ -122,7 +128,6 @@ module.exports = class NameGenerator {
     get mutationDecoratorTestFile() {
         return `${this.baseDir}/decorators/${this.spineCase}-mutation.decorator.spec.ts`
     }
-
 
     get mutationDecoratorImportFile() {
         return `./${this.spineCase}-mutation.decorator`
@@ -176,7 +181,6 @@ module.exports = class NameGenerator {
         return `${this.baseDir}/decorators/${this.spineCase}-query.decorator.ts`
     }
 
-
     get queryDecoratorTestFile() {
         return `${this.baseDir}/decorators/${this.spineCase}-query.decorator.spec.ts`
     }
@@ -189,7 +193,6 @@ module.exports = class NameGenerator {
         return `${this.camelCase}Query`
     }
 
-
     get gqlQueryName() {
         return inflection.camelize(this.snakeCase, true)
     }
@@ -197,7 +200,6 @@ module.exports = class NameGenerator {
     get queryConstantName() {
         return `GQL_QUERY_${this.upperCase}`
     }
-
 
 }
 

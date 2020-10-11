@@ -10,6 +10,9 @@ module.exports = (h, name) => {
     shelljs.mkdir('-p', nameGenerator.decoratorsDir)
     shelljs.mkdir('-p', nameGenerator.inputTypesDir)
 
+    shelljs.touch(nameGenerator.inputTypeIndexFile)
+    h.storage.inputTypeIndexFile = nameGenerator.inputTypeIndexFile
+
     shelljs.touch(nameGenerator.decoratorIndexFile)
     h.storage.decoratorIndexFile = nameGenerator.decoratorIndexFile
 
