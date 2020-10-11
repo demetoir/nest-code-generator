@@ -1,58 +1,37 @@
 const shelljs = require('shelljs')
-const inflection = require('inflection');
+const baseLoader = require('./base.loader')
+const NameGenerator = require("./name-generator")
 
 module.exports = (h, name) => {
-    const path = name.split('/').reverse().slice(1).reverse().join('/')
-    const filePrefix = name.split('/').pop()
-    const baseDir = `${h.root}/${path}`;
-    h.storage.path = path
-    h.storage.filePrefix = filePrefix
-    h.storage.baseDir = baseDir
+    const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
+    const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
 
     shelljs.mkdir('-p', baseDir)
-    shelljs.mkdir('-p', `${baseDir}/decorators`)
-    shelljs.mkdir('-p', `${baseDir}/input-types`)
+    shelljs.mkdir('-p', nameGenerator.decoratorsDir)
+    shelljs.mkdir('-p', nameGenerator.inputTypesDir)
 
-    const decoratorIndexFile = `${baseDir}/decorators/index.ts`
-    shelljs.touch(decoratorIndexFile)
-    h.storage.decoratorIndexFile = decoratorIndexFile
+    shelljs.touch(nameGenerator.decoratorIndexFile)
+    h.storage.decoratorIndexFile = nameGenerator.decoratorIndexFile
 
+    h.storage.decoratorFile = nameGenerator.inputTypeArgDecoratorFile
 
-    const decoratorFile = `${baseDir}/decorators/${filePrefix}-input-type-args.decorator.ts`
-    h.storage.decoratorFile = decoratorFile
+    h.storage.decoratorTestFile = nameGenerator.inputTypeArgDecoratorTestFile
 
-    const decoratorTestFile = `${baseDir}/decorators/${filePrefix}-input-type-args.decorator.spec.ts`
-    h.storage.decoratorTestFile = decoratorTestFile
+    h.storage.inputTypeFile = nameGenerator.inputTypeFile
 
+    h.storage.inputTypeTestFile = nameGenerator.inputTypeTestFile
 
-    const inputTypeFile = `${baseDir}/input-types/${filePrefix}.input-type.ts`
-    h.storage.inputTypeFile = inputTypeFile
+    shelljs.touch(nameGenerator.constantsFile)
+    h.storage.constantFile = nameGenerator.constantsFile
 
+    h.storage.decoratorImportFile = nameGenerator.inputTypeArgDecoratorImportPath
 
-    const inputTypeTestFile = `${baseDir}/input-types/${filePrefix}.input-type.spec.ts`
-    h.storage.inputTypeTestFile = inputTypeTestFile
+    h.storage.decoratorName = nameGenerator.inputTypeArgDecoratorName
 
-    const constantFile = `${baseDir}/constants.ts`
-    shelljs.touch(constantFile)
-    h.storage.constantFile = constantFile
+    h.storage.inputTypeName = nameGenerator.gqlInputTypeName
 
+    h.storage.constantName = nameGenerator.inputTypeConstantName
 
-    const decoratorImportFile = `./${filePrefix}-input-type-args.decorator`
-    h.storage.decoratorImportFile = decoratorImportFile
-
-    const normalized = filePrefix.replace(/-/g, '_')
-    h.storage.normalized = normalized
-
-    const decoratorName = `${inflection.camelize(normalized)}InputTypeArgs`
-    h.storage.decoratorName = decoratorName
-
-    const inputTypeName = inflection.camelize(normalized)
-    h.storage.inputTypeName = `${inputTypeName}Input`
-
-    const constantName = `GQL_INPUT_TYPE_${normalized.toUpperCase()}`
-    h.storage.constantName = constantName
-
-    const inputTypeClassName = inflection.camelize(normalized)
-    h.storage.inputTypeClassName = `${inputTypeClassName}InputType`
+    h.storage.inputTypeClassName = nameGenerator.inputTypeClassName
 }
 

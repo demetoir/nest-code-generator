@@ -1,45 +1,30 @@
 const shelljs = require('shelljs')
-const inflection = require('inflection');
+const baseLoader = require('./base.loader')
+const NameGenerator = require("./name-generator")
 
 module.exports = (h, name) => {
-    const path = name.split('/').reverse().slice(1).reverse().join('/')
-    const filePrefix = name.split('/').pop()
-    const baseDir = `${h.root}/${path}`;
-    h.storage.path = path
-    h.storage.filePrefix = filePrefix
-    h.storage.baseDir = baseDir
+    const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
+    const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
 
     shelljs.mkdir('-p', baseDir)
-    shelljs.mkdir('-p', `${baseDir}/decorators`)
+    shelljs.mkdir('-p', nameGenerator.decoratorsDir)
 
-    const decoratorIndexFile = `${baseDir}/decorators/index.ts`
-    shelljs.touch(decoratorIndexFile)
-    h.storage.decoratorIndexFile = decoratorIndexFile
+    shelljs.touch(nameGenerator.decoratorIndexFile)
+    h.storage.decoratorIndexFile = nameGenerator.decoratorIndexFile
 
-    const decoratorFile = `${baseDir}/decorators/${filePrefix}-query.decorator.ts`
-    h.storage.decoratorFile = decoratorFile
+    h.storage.decoratorFile = nameGenerator.queryDecoratorFile
 
-    const decoratorTestFile = `${baseDir}/decorators/${filePrefix}-query.decorator.spec.ts`
-    h.storage.decoratorTestFile = decoratorTestFile
+    h.storage.decoratorTestFile = nameGenerator.queryDecoratorTestFile
 
-    const constantFile = `${baseDir}/constants.ts`
-    shelljs.touch(constantFile)
-    h.storage.constantFile = constantFile
+    shelljs.touch(nameGenerator.constantsFile)
+    h.storage.constantFile = nameGenerator.constantsFile
 
-    const decoratorImportFile = `./${filePrefix}-query.decorator`
-    h.storage.decoratorImportFile = decoratorImportFile
+    h.storage.decoratorImportFile = nameGenerator.queryDecoratorImportPath
 
-    const normalized = filePrefix.replace(/-/g, '_')
-    h.storage.normalized = normalized
+    h.storage.decoratorName = nameGenerator.queryDecoratorName
 
-    const decoratorName = `${inflection.camelize(normalized)}Query`
-    h.storage.decoratorName = decoratorName
-
-    const queryName = h.inflection.camelize(normalized, true)
-    h.storage.queryName = queryName
-
-    const constantName = `GQL_QUERY_${normalized.toUpperCase()}`
-    h.storage.constantName = constantName
+    h.storage.queryName = nameGenerator.gqlQueryName
+    h.storage.constantName = nameGenerator.queryConstantName
 }
 
 

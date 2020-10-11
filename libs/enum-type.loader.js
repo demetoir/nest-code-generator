@@ -5,7 +5,6 @@ const NameGenerator = require('./name-generator')
 
 module.exports = (h, name) => {
     const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
-
     const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
 
     shelljs.mkdir('-p', baseDir)

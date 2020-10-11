@@ -1,48 +1,33 @@
 const shelljs = require('shelljs')
-const inflection = require('inflection');
+const baseLoader = require('./base.loader')
+const NameGenerator = require('./name-generator')
 
 module.exports = (h, name) => {
-    const path = name.split('/').reverse().slice(1).reverse().join('/')
-    const filePrefix = name.split('/').pop()
-    const baseDir = `${h.root}/${path}`;
-    h.storage.path = path
-    h.storage.filePrefix = filePrefix
-    h.storage.baseDir = baseDir
+    const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
+    const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
 
     shelljs.mkdir('-p', baseDir)
-    shelljs.mkdir('-p', `${baseDir}/decorators`)
+    shelljs.mkdir('-p', nameGenerator.decoratorsDir)
 
-    const decoratorIndexFile = `${baseDir}/decorators/index.ts`
-    shelljs.touch(decoratorIndexFile)
-    h.storage.decoratorIndexFile = decoratorIndexFile
+    shelljs.touch(nameGenerator.decoratorIndexFile)
+    h.storage.decoratorIndexFile = nameGenerator.decoratorIndexFile
 
+    h.storage.decoratorFile = nameGenerator.mutationDecoratorFile
 
-    const decoratorFile = `${baseDir}/decorators/${filePrefix}-mutation.decorator.ts`
-    h.storage.decoratorFile = decoratorFile
+    h.storage.decoratorTestFile = nameGenerator.mutationDecoratorTestFile
 
-    const decoratorTestFile = `${baseDir}/decorators/${filePrefix}-mutation.decorator.spec.ts`
-    h.storage.decoratorTestFile = decoratorTestFile
+    shelljs.touch(nameGenerator.constantsFile)
+    h.storage.constantFile = nameGenerator.constantsFile
 
-    const constantFile = `${baseDir}/constants.ts`
-    shelljs.touch(constantFile)
-    h.storage.constantFile = constantFile
+    h.storage.decoratorImportFile = nameGenerator.mutationDecoratorImportFile
 
+    h.storage.decoratorName = nameGenerator.mutationDecoratorName
 
-    const decoratorImportFile = `./${filePrefix}-mutation.decorator`
-    h.storage.decoratorImportFile = decoratorImportFile
+    h.storage.mutationName = nameGenerator.gqlMutationName
 
-    const normalized = filePrefix.replace(/-/g, '_')
-    h.storage.normalized = normalized
-
-    const decoratorName = `${inflection.camelize(normalized)}Mutation`
-    h.storage.decoratorName = decoratorName
-
-    const mutationName = inflection.camelize(normalized, true)
-    h.storage.mutationName = mutationName
-
-    const constantName = `GQL_MUTATION_${normalized.toUpperCase()}`
-    h.storage.constantName = constantName
+    h.storage.constantName = nameGenerator.mutationConstantName
 }
+
 
 
 

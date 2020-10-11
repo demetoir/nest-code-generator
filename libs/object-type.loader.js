@@ -1,46 +1,30 @@
 const shelljs = require('shelljs')
-const inflection = require('inflection');
+const baseLoader = require('./base.loader')
+const NameGenerator = require("./name-generator")
 
 module.exports = (h, name) => {
-    const path = name.split('/').reverse().slice(1).reverse().join('/')
-    const filePrefix = name.split('/').pop()
-    const baseDir = h.root + "/" + path;
-    h.storage.path = path
-    h.storage.filePrefix = filePrefix
-    h.storage.baseDir = baseDir
+    const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
+    const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
 
     shelljs.mkdir('-p', baseDir)
-    shelljs.mkdir('-p', `${baseDir}/object-types`)
+    shelljs.mkdir('-p', nameGenerator.objectTypeDir)
 
+    h.storage.objectTypeFile = nameGenerator.objectTypeFile
 
-    const objectTypeFile = `${baseDir}/object-types/${filePrefix}.object-type.ts`
-    h.storage.objectTypeFile = objectTypeFile
+    h.storage.objectTypeTestFile = nameGenerator.objectTypeTestFile
 
-    const objectTypeTestFile = `${baseDir}/object-types/${filePrefix}.object-type.spec.ts`
-    h.storage.objectTypeTestFile = objectTypeTestFile
+    h.storage.objectTypeFactoryFile = nameGenerator.objectTypeFactoryFile
 
-    const objectTypeFactoryFile = `${baseDir}/object-types/${filePrefix}.object-type.factory.ts`
-    h.storage.objectTypeFactoryFile = objectTypeFactoryFile
+    h.storage.objectTypeFactoryTestFile = nameGenerator.objectTypeFactoryTestFile
 
-    const objectTypeFactoryTestFile = `${baseDir}/object-types/${filePrefix}.object-type.factory.spec.ts`
-    h.storage.objectTypeFactoryTestFile = objectTypeFactoryTestFile
+    shelljs.touch(nameGenerator.constantsFile)
+    h.storage.constantFile = nameGenerator.constantsFile
 
+    h.storage.objectTypeName = nameGenerator.gqlObjectTypeName
 
-    const constantFile = `${baseDir}/constants.ts`
-    shelljs.touch(constantFile)
-    h.storage.constantFile = constantFile
+    h.storage.constantName = nameGenerator.objectTypeConstantName
 
-    const normalized = filePrefix.replace(/-/g, '_')
-    h.storage.normalized = normalized
-
-    const objectTypeName = inflection.camelize(normalized)
-    h.storage.objectTypeName = objectTypeName
-
-    const constantName = `GQL_OBJECT_TYPE_${normalized.toUpperCase()}`
-    h.storage.constantName = constantName
-
-    const objectTypeClassName = inflection.camelize(normalized)
-    h.storage.objectTypeClassName = `${objectTypeClassName}ObjectType`
+    h.storage.objectTypeClassName = nameGenerator.objectTypeClassName
 
 }
 

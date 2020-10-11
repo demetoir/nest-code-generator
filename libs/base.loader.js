@@ -1,7 +1,7 @@
 module.exports = (h, name) => {
     const path = name.split('/').reverse().slice(1).reverse().join('/')
     const spineCase = name.split('/').pop()
-    const baseDir = `${h.root}/${path}`;
+    const baseDir = path.length > 0 ? `${h.root}/${path}` : `${h.root}`;
     const snakeCase = spineCase.replace(/-/g, '_')
     const camelCase = h.inflection.camelize(snakeCase)
     const upperCase = snakeCase.toUpperCase()
