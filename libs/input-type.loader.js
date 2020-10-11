@@ -36,5 +36,8 @@ module.exports = (h, name) => {
     h.storage.constantName = nameGenerator.inputTypeConstantName
 
     h.storage.inputTypeClassName = nameGenerator.inputTypeClassName
+
+    h.storage.inputTypeFactoryFile = nameGenerator.inputTypeFactoryFile
+    h.storage.inputTypeFactoryTestFile = nameGenerator.inputTypeFactoryTestFile
 }
 

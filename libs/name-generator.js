@@ -181,6 +181,14 @@ module.exports = class NameGenerator {
         return `${this.baseDir}/object-types/index.ts`
     }
 
+    get inputTypeFactoryFile(){
+        return `${this.baseDir}/input-types/${this.spineCase}.input-type.factory.ts`
+    }
+
+    get inputTypeFactoryTestFile(){
+        return `${this.baseDir}/input-types/${this.spineCase}.input-type.factory.spec.ts`
+    }
+
     get queryDecoratorFile() {
         return `${this.baseDir}/decorators/${this.spineCase}-query.decorator.ts`
     }
