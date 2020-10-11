@@ -1,5 +1,5 @@
 {
-  "name": "nest-gql-code-generator",
+  "name": "nest-code-generator",
   "version": "1.0.0",
   "license": "MIT",
   "author": {
@@ -7,13 +7,15 @@
     "name": "demetoir",
     "url": "https://github.com/demetoir"
   },
+  "bin": "./bin/cli.js",
   "scripts": {
     "generate": "hygen generate"
   },
   "dependencies": {
     "hygen": "^6.0.4",
     "inflection": "^1.12.0",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "yargs": "^16.0.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
