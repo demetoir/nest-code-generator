@@ -9,6 +9,9 @@ module.exports = (h, name) => {
     shelljs.mkdir('-p', baseDir)
     shelljs.mkdir('-p', nameGenerator.objectTypeDir)
 
+    shelljs.touch(nameGenerator.objectTypeIndexFile)
+    h.storage.objectTypeIndexFile = nameGenerator.objectTypeIndexFile
+
     h.storage.objectTypeFile = nameGenerator.objectTypeFile
 
     h.storage.objectTypeTestFile = nameGenerator.objectTypeTestFile

@@ -177,6 +177,10 @@ module.exports = class NameGenerator {
         return `${this.camelCase}ObjectType`
     }
 
+    get objectTypeIndexFile(){
+        return `${this.baseDir}/object-types/index.ts`
+    }
+
     get queryDecoratorFile() {
         return `${this.baseDir}/decorators/${this.spineCase}-query.decorator.ts`
     }
