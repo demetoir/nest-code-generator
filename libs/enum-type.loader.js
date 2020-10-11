@@ -1,36 +1,31 @@
 const shelljs = require('shelljs')
 const baseLoader = require('./base.loader')
+const NameGenerator = require('./name-generator')
 
 
 module.exports = (h, name) => {
     const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)
 
+    const nameGenerator = new NameGenerator({baseDir, spineCase, snakeCase, upperCase, camelCase})
+
     shelljs.mkdir('-p', baseDir)
-    shelljs.mkdir('-p', `${baseDir}/enums`)
+    shelljs.mkdir('-p', nameGenerator.enumDir)
 
-    const decoratorIndexFile = `${baseDir}/enums/index.ts`
-    shelljs.touch(decoratorIndexFile)
-    h.storage.decoratorIndexFile = decoratorIndexFile
+    shelljs.touch(nameGenerator.enumIndexFile)
+    h.storage.decoratorIndexFile = nameGenerator.enumIndexFile
+    h.storage.enumTypeFile = nameGenerator.enumTypeFile
+    h.storage.enumTypeTestFile = nameGenerator.enumTypeTestFile
 
-    const enumTypeFile = `${baseDir}/enums/${spineCase}.enum.ts`
-    h.storage.enumTypeFile = enumTypeFile
+    shelljs.touch(nameGenerator.constantsFile)
+    h.storage.constantFile = nameGenerator.constantsFile
 
-    const enumTypeTestFile = `${baseDir}/enums/${spineCase}.enum.spec.ts`
-    h.storage.enumTypeTestFile = enumTypeTestFile
+    h.storage.enumTypeName = nameGenerator.enumName
 
-    const constantFile = `${baseDir}/constants.ts`
-    shelljs.touch(constantFile)
-    h.storage.constantFile = constantFile
+    h.storage.constantName = nameGenerator.enumConstantName
 
-    const enumTypeName = `${camelCase}Enum`
-    h.storage.enumTypeName = enumTypeName
-
-    const constantName = `GQL_ENUM_TYPE_${upperCase}`
-    h.storage.constantName = constantName
-
-    const enumName = `${camelCase}Enum`
-    h.storage.enumName = enumName
+    h.storage.enumName = nameGenerator.gqlEnumTypeName
 }
+
 
 
 
