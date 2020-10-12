@@ -1,6 +1,6 @@
 const shelljs = require('shelljs')
 const baseLoader = require('./base.loader')
-const NameGenerator = require("./name-generator")
+const NameGenerator = require('../name.builder')
 
 module.exports = (h, name) => {
     const {baseDir, spineCase, snakeCase, upperCase, camelCase} = baseLoader(h, name)

@@ -20,4 +20,4 @@ runner(process.argv.slice(2), {
         storage: {},
     },
     debug: !!process.env.DEBUG
-})
+}).then()
