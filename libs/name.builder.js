@@ -14,19 +14,19 @@ module.exports = class NameGenerator {
     }
 
     get enumIndexFile() {
-        return `${this.baseDir}/enums/index.ts`
+        return `${this.baseDir}/enum-types/index.ts`
     }
 
     get enumTypeFile() {
-        return `${this.baseDir}/enums/${this.spineCase}.enum.ts`
+        return `${this.baseDir}/enum-types/${this.spineCase}.enum-type.ts`
     }
 
     get enumTypeTestFile() {
-        return `${this.baseDir}/enums/${this.spineCase}.enum.spec.ts`
+        return `${this.baseDir}/enum-types/${this.spineCase}.enum-type.spec.ts`
     }
 
     get enumDir() {
-        return `${this.baseDir}/enums`
+        return `${this.baseDir}/enum-types`
     }
 
     get enumConstantName() {
