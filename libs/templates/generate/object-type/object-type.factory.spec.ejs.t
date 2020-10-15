@@ -17,9 +17,9 @@ describe('<%= h.storage.objectTypeClassName %>Factory', () => {
 		});
 
 		it('should return object type', function() {
-			const user = factory.build();
+			const objectType = factory.build();
 
-			expect(user).toBeInstanceOf(<%= h.storage.objectTypeClassName %>);
+			expect(objectType).toBeInstanceOf(<%= h.storage.objectTypeClassName %>);
 		});
 	});
 });
