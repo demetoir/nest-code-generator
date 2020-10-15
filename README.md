@@ -87,9 +87,10 @@ this will generate code at ```src/user``` directory
 
 ## configuration
 
-.hygen.js
+* TBD
 
 ## limitation
+* TBD
 
 
  
