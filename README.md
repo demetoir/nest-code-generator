@@ -3,6 +3,11 @@
 [hygen.io](http://www.hygen.io/) base [nest.js](https://nestjs.com/) typescript code generator
 
 
+## installation
+```shell script
+npm install nest-code-generator
+```
+
 ## usage
 ```shell script
 yarn nest-code-generator generate {generate-type} {name}
