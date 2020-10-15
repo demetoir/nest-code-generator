@@ -58,11 +58,11 @@ module.exports = class NameGenerator {
     }
 
     get inputTypeArgDecoratorFile() {
-        return `${this.baseDir}/decorators/${this.spineCase}-input-type-args.decorator.ts`
+        return `${this.baseDir}/decorators/${this.spineCase}-input-args.decorator.ts`
     }
 
     get inputTypeArgDecoratorTestFile() {
-        return `${this.baseDir}/decorators/${this.spineCase}-input-type-args.decorator.spec.ts`
+        return `${this.baseDir}/decorators/${this.spineCase}-input-args.decorator.spec.ts`
     }
 
     get inputTypeFile() {
@@ -74,11 +74,11 @@ module.exports = class NameGenerator {
     }
 
     get inputTypeArgDecoratorImportPath() {
-        return `./${this.spineCase}-input-type-args.decorator`
+        return `./${this.spineCase}-input-args.decorator`
     }
 
     get inputTypeArgDecoratorName() {
-        return `${this.camelCase}InputTypeArgs`
+        return `${this.camelCase}InputArgs`
     }
 
     get gqlInputTypeName() {
