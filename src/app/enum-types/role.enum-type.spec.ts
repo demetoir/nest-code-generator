@@ -1,4 +1,4 @@
-import { RoleEnum } from './role.enum';
+import { RoleEnum } from './role.enum-type';
 
 describe('RoleEnum', () => {
 	it('should be defined', () => {

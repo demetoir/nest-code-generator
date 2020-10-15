@@ -14,9 +14,9 @@ describe('UserObjectTypeFactory', () => {
 		});
 
 		it('should return object type', function() {
-			const user = factory.build();
+			const objectType = factory.build();
 
-			expect(user).toBeInstanceOf(UserObjectType);
+			expect(objectType).toBeInstanceOf(UserObjectType);
 		});
 	});
 });
