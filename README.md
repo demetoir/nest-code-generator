@@ -5,12 +5,12 @@
 
 ## usage
 ```shell script
-yarn generate {generate-type} {name}
+yarn nest-code-generator generate {generate-type} {name}
 ```
 
 
 ```shell script
-yarn generate input-type user/create-one
+yarn nest-code-generator generate input-type user/create-one
 ```
 
 this will generate code at ```src/user``` directory
