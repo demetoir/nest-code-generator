@@ -1,7 +1,7 @@
 ---
 to: <%= h.storage.decoratorTestFile %>
 ---
-import { <%= h.storage.decoratorName %> } from './<%= h.storage.filePrefix %>-input-type-args.decorator';
+import { <%= h.storage.decoratorName %> } from './<%= h.storage.filePrefix %>-input-args.decorator';
 
 describe('<%= h.storage.decoratorName %>', () => {
 	it('should defined', () => {
