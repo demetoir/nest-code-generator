@@ -11,7 +11,7 @@ describe('GetOneUserQuery', () => {
 		expect(decorator).toBeInstanceOf(Function);
 	});
 
-	it('should take arg options', function() {
+	it('should take arg options', () => {
 		const options = {};
 
 		const decorator = GetOneUserQuery(options);

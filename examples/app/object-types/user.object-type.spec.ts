@@ -9,7 +9,7 @@ describe('', () => {
 	describe('should define field', () => {
 		const objectType = new UserObjectType();
 
-		it('should prepare objectType', function() {
+		it('should prepare objectType', () => {
 		    expect(objectType).toBeDefined()
 		});
 	});

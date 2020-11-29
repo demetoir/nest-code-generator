@@ -9,11 +9,11 @@ describe('UserObjectTypeFactory', () => {
 	});
 
 	describe('static method build', () => {
-		it('should defined', function() {
+		it('should defined', () => {
 			expect(factory.build).toBeDefined();
 		});
 
-		it('should return object type', function() {
+		it('should return object type', () => {
 			const objectType = factory.build();
 
 			expect(objectType).toBeInstanceOf(UserObjectType);

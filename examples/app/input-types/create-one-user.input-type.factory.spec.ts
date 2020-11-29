@@ -13,7 +13,7 @@ describe('CreateOneUserInputTypeFactory', () => {
 			expect(factory.build).toBeDefined();
 		});
 
-		it('should return object type', function() {
+		it('should return object type', () => {
 			const user = factory.build();
 
 			expect(user).toBeInstanceOf(CreateOneUserInputType);
