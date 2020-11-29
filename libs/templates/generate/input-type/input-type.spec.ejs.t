@@ -12,7 +12,7 @@ describe('<%= h.storage.inputTypeClassName %>', () => {
 	describe('should define field', () => {
 		const objectType = new <%= h.storage.inputTypeClassName %>();
 
-		it('should prepare objectType', function() {
+		it('should prepare objectType', () => {
 		    expect(objectType).toBeDefined()
 		});
 	});
